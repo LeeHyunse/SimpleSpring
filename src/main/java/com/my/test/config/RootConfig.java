@@ -8,9 +8,5 @@ import org.springframework.stereotype.Component;
 
 @Configuration
 @Import({PropertiesConfig.class, DBConfig.class})
-@ComponentScan(basePackages = {"com.my.test"},
-	includeFilters = @Filter(value = {Component.class}), 
-	useDefaultFilters = false
-)
 public class RootConfig {
 }
