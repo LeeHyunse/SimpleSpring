@@ -8,7 +8,8 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @Configuration
 @PropertySource({
 	"classpath:properties/a.properties",
-	"classpath:properties/b.properties"
+	"classpath:properties/b.properties",
+	"classpath:properties/db.properties"
 	})
 public class PropertiesConfig {
 

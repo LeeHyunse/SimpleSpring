@@ -2,6 +2,7 @@
 <configuration>
 	<!-- Appenders -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    	<param name="encoding" value="UTF-8" />
 		<encoder>
 			<pattern>%date %-5level %logger{0} - %msg%n</pattern>
 		</encoder>

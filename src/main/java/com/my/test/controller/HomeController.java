@@ -1,13 +1,18 @@
 package com.my.test.controller;
 
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.my.test.dao.MemberDao;
+import com.my.test.model.Member;
 
 /**
  * Handles requests for the application home page.
@@ -17,12 +22,23 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	@Autowired
+	private MemberDao memberDao;
+	
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.debug("·Î±×Ãâ·Â Å×½ºÆ® debug");
-		logger.info("·Î±×Ãâ·Â Å×½ºÆ® info");
-		logger.warn("·Î±×Ãâ·Â Å×½ºÆ® warn");
-		logger.error("·Î±×Ãâ·Â Å×½ºÆ® error");
+		logger.debug("ë¡œê·¸ì¶œë ¥ debug");
+		logger.info("ë¡œê·¸ì¶œë ¥ info");
+		logger.warn("ë¡œê·¸ì¶œë ¥ warn");
+		logger.error("ë¡œê·¸ì¶œë ¥ error");
+		
+		List<Member> memberList = memberDao.selectMember();
+		for(Member member : memberList) {
+			logger.info("member({}) name={}, age={}", member.getNo(), member.getName(), member.getAge());
+		}
+		
+		
 		return "home";
 	}
 }
