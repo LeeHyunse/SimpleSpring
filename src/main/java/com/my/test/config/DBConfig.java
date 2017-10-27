@@ -38,19 +38,8 @@ public class DBConfig {
         HikariConfig config = new HikariConfig();
         config.addDataSourceProperty("user", env.getProperty("db.user"));
         config.addDataSourceProperty("password", env.getProperty("db.password"));
-        config.setMinimumIdle(Integer.parseInt(env.getProperty("db.minimumIdle")));
-        config.setMaximumPoolSize(Integer.parseInt(env.getProperty("db.minimumIdle")));
-        
-
-        config.setConnectionTimeout(300000); 
-        config.setConnectionTestQuery("SELECT 1 FROM dual");
-        config.addDataSourceProperty("cachePrepStmts", "true");
-        config.addDataSourceProperty("prepStmtCacheSize", "50");
-        
-        config.addDataSourceProperty("useServerPrepStmts", "true");
         config.setDriverClassName("com.mysql.jdbc.Driver");
         config.setJdbcUrl(env.getProperty("db.url"));
-
         return new HikariDataSource(config);
     }
 	

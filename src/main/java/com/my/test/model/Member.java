@@ -4,6 +4,7 @@ public class Member {
 	private int no;
 	private String name;
 	private String age;
+	private String registerYmdt;
 	
 	public int getNo() {
 		return no;
@@ -23,4 +24,11 @@ public class Member {
 	public void setAge(String age) {
 		this.age = age;
 	}
+	public String getRegisterYmdt() {
+		return registerYmdt;
+	}
+	public void setRegisterYmdt(String registerYmdt) {
+		this.registerYmdt = registerYmdt;
+	}
+	
 }

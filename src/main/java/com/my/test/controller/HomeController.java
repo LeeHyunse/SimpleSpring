@@ -25,7 +25,6 @@ public class HomeController {
 	@Autowired
 	private MemberDao memberDao;
 	
-	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.debug("로그출력 debug");
@@ -35,9 +34,8 @@ public class HomeController {
 		
 		List<Member> memberList = memberDao.selectMember();
 		for(Member member : memberList) {
-			logger.info("member({}) name={}, age={}", member.getNo(), member.getName(), member.getAge());
+			logger.info("member({}) name={}, age={}, registerYmdt={}", member.getNo(), member.getName(), member.getAge(), member.getRegisterYmdt());
 		}
-		
 		
 		return "home";
 	}
