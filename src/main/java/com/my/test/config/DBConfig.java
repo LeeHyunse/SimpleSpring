@@ -24,10 +24,6 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @EnableTransactionManagement(mode = AdviceMode.PROXY, order = 0)
-@ComponentScan(basePackages = {"com.my.test.dao"},
-includeFilters = @Filter(value = {Repository.class}), 
-useDefaultFilters = false
-)
 public class DBConfig {
 	
 	@Autowired
