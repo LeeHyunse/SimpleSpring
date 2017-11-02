@@ -21,4 +21,12 @@ public class MemberDao {
 	public List<Member> selectMember() {
 		return sqlSession.selectList(MAPPER_NAMESPACE + "selectMember");
 	}
+	
+	public Member selectMemberByName(String name) {
+		return sqlSession.selectOne(MAPPER_NAMESPACE + "selectMemberByName", name);
+	}
+	
+	public void insertMember(Member member) {
+		sqlSession.insert(MAPPER_NAMESPACE + "insertMember", member);
+	}
 }

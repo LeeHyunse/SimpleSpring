@@ -24,10 +24,6 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @EnableTransactionManagement(mode = AdviceMode.PROXY, order = 0)
-@ComponentScan(basePackages = {"com.my.test.dao"},
-includeFilters = @Filter(value = {Repository.class}), 
-useDefaultFilters = false
-)
 public class DBConfig {
 	
 	@Autowired
@@ -49,12 +45,6 @@ public class DBConfig {
     }
 	
 	@Bean
-    public DataSourceTransactionManager transactionManager(DataSource dataSource) {
-        DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager(dataSource);
-        return dataSourceTransactionManager;
-    }
-	
-	@Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
@@ -68,6 +58,11 @@ public class DBConfig {
         return sqlSessionFactoryBean.getObject();
     }
     
+	@Bean
+    public DataSourceTransactionManager transactionManager(DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
+    }
+	
     @Bean(destroyMethod = "clearCache")
     public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) {
         SqlSessionTemplate sessionTemplate = new SqlSessionTemplate(sqlSessionFactory);
