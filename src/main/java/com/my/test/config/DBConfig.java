@@ -45,12 +45,6 @@ public class DBConfig {
     }
 	
 	@Bean
-    public DataSourceTransactionManager transactionManager(DataSource dataSource) {
-        DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager(dataSource);
-        return dataSourceTransactionManager;
-    }
-	
-	@Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
@@ -64,6 +58,11 @@ public class DBConfig {
         return sqlSessionFactoryBean.getObject();
     }
     
+	@Bean
+    public DataSourceTransactionManager transactionManager(DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
+    }
+	
     @Bean(destroyMethod = "clearCache")
     public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) {
         SqlSessionTemplate sessionTemplate = new SqlSessionTemplate(sqlSessionFactory);

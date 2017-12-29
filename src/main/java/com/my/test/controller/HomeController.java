@@ -1,6 +1,5 @@
 package com.my.test.controller;
 
-import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.my.test.dao.MemberDao;
-import com.my.test.model.Member;
+import com.my.test.service.MemberService;
 
 /**
  * Handles requests for the application home page.
@@ -23,19 +22,14 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@Autowired
+	private MemberService memberService;
+	@Autowired
 	private MemberDao memberDao;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.debug("로그출력 debug");
-		logger.info("로그출력 info");
-		logger.warn("로그출력 warn");
-		logger.error("로그출력 error");
-		
-		List<Member> memberList = memberDao.selectMember();
-		for(Member member : memberList) {
-			logger.info("member({}) name={}, age={}, registerYmdt={}", member.getNo(), member.getName(), member.getAge(), member.getRegisterYmdt());
-		}
+	public String home(Locale locale, Model model) throws Exception {
+		memberService.testTransaction0();
+		memberService.testTransaction1();
 		
 		return "home";
 	}

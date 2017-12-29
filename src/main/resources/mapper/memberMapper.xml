@@ -8,4 +8,21 @@
 		FROM
 			member
 	</select>
+	
+	<select id="selectMemberByName" parameterType="String" resultType="com.my.test.model.Member">
+		SELECT
+			*
+		FROM
+			member
+		WHERE
+			name=#{name}
+		LIMIT 1
+	</select>
+	
+	<insert id="insertMember" parameterType="com.my.test.model.Member">
+		INSERT INTO member
+			(name, age, register_ymdt)
+		VALUES
+			(#{name}, #{age}, NOW())
+	</insert>
 </mapper>
