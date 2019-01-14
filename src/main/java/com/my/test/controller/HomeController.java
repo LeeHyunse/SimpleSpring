@@ -70,7 +70,7 @@ public class HomeController {
 		Callable<String> cstr = new Callable<String>() {
 			@Override
 			public String call() throws Exception {
-				System.out.println(Thread.currentThread().getId());
+				System.out.println(Thread.currentThread().getId() + "/ 신규 스레드 시작");
 				Thread.sleep(2000);
 				System.out.println(Thread.currentThread().getId() + "/ 신규 스레드 종료");
 				return "query2";
@@ -174,14 +174,14 @@ public class HomeController {
 	}
 	
 	
-	@RequestMapping(value = "/query6", method = RequestMethod.POST)
+	@RequestMapping(value = "/query6", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseBodyEmitter query6(Model model) {
 		System.out.println(Thread.currentThread().getId());
 		ExecutorService es = Executors.newFixedThreadPool(3);
 		ResponseBodyEmitter emitter = new ResponseBodyEmitter();
 		es.execute(() -> {
-			for (int i=0; i<5; i++) {
+			for (int i=0; i<10; i++) {
 				try {
 					System.out.println(Thread.currentThread().getId() + "," + "i="+i);
 					Thread.sleep(1000);
@@ -203,7 +203,7 @@ public class HomeController {
 		ExecutorService es = Executors.newFixedThreadPool(3);
 		SseEmitter emitter = new SseEmitter();
 		es.execute(() -> {
-			for (int i=0; i<5; i++) {
+			for (int i=0; i<10; i++) {
 				try {
 					System.out.println(Thread.currentThread().getId() + "," + "i="+i);
 					Thread.sleep(1000);

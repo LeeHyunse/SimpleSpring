@@ -10,11 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+
+import com.my.test.interceptor.AsyncInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -28,6 +31,13 @@ public class ServletConfig extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/**").resourceChain(true);
 	}
 	
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		// TODO Auto-generated method stub
+		registry.addInterceptor(new AsyncInterceptor());
+		super.addInterceptors(registry);
+	}
+
 	
 	@Bean
     public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
